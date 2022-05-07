@@ -7,7 +7,7 @@ const dbConection=async()=>{
     try { 
 //usecreateindex, usefindandmodify
      
-      await mongoose.connect(process.env.MONGODB_CNN,{
+      await mongoose.connect(`mongodb+srv://GabrielTiburon:wwwaaa12@cluster0.8kyiy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`,{
         useNewUrlParser:true,
         useUnifiedTopology:true
       });

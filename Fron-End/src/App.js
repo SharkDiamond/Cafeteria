@@ -1,26 +1,33 @@
 //IMPORTACIONES
-import logo from './logo.svg';
+import BarraCategorias from './Components/BarraCategorias.js';
+import PanelShowData from './Components/PanelShowData.js';
+import InsertData from './Components/InsertData.js';
+import {Container,Row} from 'react-bootstrap';
+import Welcome from './Components/Welcome.js';
 import './App.css';
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container className='ContainerPrincipal' >
+     
+     <div className='hijo'>
+     
+      <Row>
+
+        <BarraCategorias/>
+        <Welcome/>
+     
+      </Row>
+
+      <Row>
+        
+        <PanelShowData/>
+        <InsertData/>
+
+      </Row>
+    
+      </div>
+    
+    </Container>
   );
 }
-
-export default App;
