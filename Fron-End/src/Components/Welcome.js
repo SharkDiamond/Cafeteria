@@ -4,14 +4,10 @@ import '../App.css';
 
 export default function Welcome() {
   return (
-   <Col lg="4" className='mt-2 mb-4'>
+   <Col lg="4" className='pt-2 pb-2 mb-5 text-center rounded segundoColor center-NavBarra-Categorias'>
 
-   <div className='segundoColor p-2 rounded center-NavBarra-Categorias justify-content-center '>
-        
-        <h3 className='mt-1 mx-2 text-dark'>Bienvenido Gabriel</h3><Button  variant='danger' className='rounded-pill mb-1'>Out</Button>
-        
-    </div>
-    
+        <p className='text-dark d-inline me-2 h3'>Bienvenido Gabriel</p><Button  variant='danger' className='rounded-pill d-inline'>Out</Button>
+   
    </Col>
   )
 }

@@ -6,12 +6,12 @@ import '../App.css';
 
 export default function PanelShowData() {
   return (
-    <Col lg="8" className='p-4 '>
+    <Col lg="7" className='tamanoPanelData me-5'>
 
-    <Row className='  tamanoPanelData'>
+        <Row className=''>
 
-      
-        <Col lg="6" className='segundoColor rounded'>
+
+          <Col lg="6" className='segundoColor rounded-start'>
 
             <ul>
 
@@ -30,13 +30,13 @@ export default function PanelShowData() {
 
             </ul>
 
-        </Col>
+          </Col>
 
-        <Col lg="6" className='segundoColor rounded'>
+          <Col lg="6" className='segundoColor rounded-end'>
   
             <Grafica/>
 
-        </Col>
+          </Col>
       
     </Row>
 

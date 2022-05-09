@@ -7,13 +7,6 @@
 
 }
 
-.tamanoPanelData{
-
-  height: 60vh;
-  
-}
-
-
 .ContainerPrincipal{
 
   height: 100vh;
@@ -46,9 +39,8 @@
 
 }
 
-.center-NavBarra-Categorias{
-  width: auto;  
-  height: auto;
+.center-items-nav{
+
   display: flex;
   align-items: center;
 

@@ -5,9 +5,9 @@ import '../App.css';
 export default function InsertData() {
   return (
       
-    <Col lg="4" className='p-2.9 pt-4 '>
+    <Col lg="4" className=' pt-4 segundoColor rounded tamanoPanelData'>
 
-        <div className='segundoColor rounded tamanoPanelData'>
+   
 
            <nav className='text-center pt-2'>
             
@@ -17,7 +17,7 @@ export default function InsertData() {
            
            </nav>
         
-        </div>
+   
     
     </Col>
   )
