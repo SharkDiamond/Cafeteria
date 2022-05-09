@@ -1,5 +1,5 @@
 import { Col,Row } from 'react-bootstrap';
-import Grafica from './Grafica';
+import Grafica from './Grafica.js';
 import React from 'react';
 import '../App.css';
 
@@ -11,30 +11,30 @@ export default function PanelShowData() {
         <Row className=''>
 
 
-          <Col lg="6" className='segundoColor rounded-start'>
+          <Col lg="6" className='segundoColor rounded-start pt-4 pb-4 tamanoPanelinfo border border-dark'>
 
-            <ul>
+            <ol>
 
-                <li className='h3'>PRODUCTO 1</li>
-                <li className='h3'>PRODUCTO 1</li>
-                <li className='h3'>PRODUCTO 1</li>
-                <li className='h3'>PRODUCTO 1</li>
-                <li className='h3'>PRODUCTO 1</li>
-                <li className='h3'>PRODUCTO 1</li>
-                <li className='h3'>PRODUCTO 1</li>
-                <li className='h3'>PRODUCTO 1</li>
-                <li className='h3'>PRODUCTO 1</li>
-                <li className='h3'>PRODUCTO 1</li>
-                <li className='h3'>PRODUCTO 1</li>
-                <li className='h3'>PRODUCTO 1</li>
+                <li className='h4'>PRODUCTO 1</li>
+                <li className='h4'>PRODUCTO 1</li>
+                <li className='h4'>PRODUCTO 1</li>
+                <li className='h4'>PRODUCTO 1</li>
+                <li className='h4'>PRODUCTO 1</li>
+                <li className='h4'>PRODUCTO 1</li>
+                <li className='h4'>PRODUCTO 1</li>
+                <li className='h4'>PRODUCTO 1</li>
+                <li className='h4'>PRODUCTO 1</li>
+                <li className='h4'>PRODUCTO 1</li>
+                <li className='h4'>PRODUCTO 1</li>
 
-            </ul>
+
+            </ol>
 
           </Col>
 
           <Col lg="6" className='segundoColor rounded-end'>
   
-            <Grafica/>
+          <Grafica/>
 
           </Col>
       

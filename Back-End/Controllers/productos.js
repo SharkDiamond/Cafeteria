@@ -1,4 +1,4 @@
-const {Producto}=require('../Models');
+const {Producto, Categoria}=require('../Models');
 const { create } = require('../Models/Categoria');
 
 //CREAR UN PRODUCTO 

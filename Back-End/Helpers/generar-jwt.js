@@ -5,8 +5,8 @@ const generarJWT=(uid='')=>{
     return new Promise((resolve,reject)=>{
 
         const payload={uid};
-        //FIRMANDO EL TOKEN
-        jwt.sign(payload,process.env.SECRETORPRIVATEKEY,{
+        //FIRMANDO EL TOKEN process.env.SECRETORPRIVATEKEY
+        jwt.sign(payload,'pruebas@asdasdas',{
 
                 expiresIn:'4h'
 

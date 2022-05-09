@@ -1,4 +1,4 @@
-const {Categoria}=require('../Models');
+const {Categoria,Producto}=require('../Models');
 
 //obtener categorias - paginado - total - populate
 const getCategorias=async(req,res)=>{
@@ -7,14 +7,30 @@ const getCategorias=async(req,res)=>{
         //RESCATANDO LOS LIMITES QUE VIENEN DEL QUERY
         const {desde=0,hasta=5}=req.query;
         //EJECUTANDO LAS DOS CONSULTAS EN PARALELO
-       const [total, categorias]= await Promise.all([
+       const [total, categorias,Productos]= await Promise.all([
 
             Categoria.countDocuments({estado:true}),
             Categoria.find({estado:true}).skip(Number(desde)).limit(Number(hasta)).populate("usuario","nombre"),
+            Producto.find().populate("usuario","nombre").populate("categoria","nombre")
 
+       
+       
 
         ]);
+        
+        categorias.forEach((categoria,index) => {
+          
+          let cantidad= Productos.filter(producto=>producto.categoria.nombre===categoria.nombre).length;
+  
+          categorias[index]={
+            ...categorias[index]._doc,
+            cantidad
+    
+        }
+             
 
+        });
+       
         res.status(200).json({total,categorias}).end();
 
     } catch (error) {
@@ -30,7 +46,9 @@ const getCategoria=async(req,res)=>{
     try {
         //EXTRAYENDO SOLO LOS DATOS NECESARIO
        const {nombre,usuario}= await Categoria.findById(req.params.id).populate("usuario","nombre");
-        //RESPONDIENDO
+        
+       
+       //RESPONDIENDO
         res.status(200).json({
             'NombreCategoria':nombre,
             'UsuarioCreador':usuario.nombre,
