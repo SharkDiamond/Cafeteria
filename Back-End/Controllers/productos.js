@@ -5,6 +5,7 @@ const { create } = require('../Models/Categoria');
 const createProduct =async (req,res)=>{
 
     try {
+        
         const {estado,...datos}=req.body;
         //CREATE UN PRODUCTO
         const create= new Producto(datos);
@@ -58,9 +59,11 @@ const getProductos  =async (req,res)=>{
 
     try {
         //SACANDO LOS LIMITES DESDE LOS PARAMETROS
-        const {desde,hasta}=req.query;
+        const {desde,hasta,categoria}=req.query;
+
+   
         //CONDICION PARA LOS PRODUCTOS
-        const condition={disponible:true,estado:true};
+        const condition={disponible:true,estado:true,categoria};
         //BUSCANDO LOS PRODUCTOS Y TRAYENDO EL TOTAL
         const [total,productos]=await Promise.all([
             Producto.countDocuments(condition)
@@ -72,7 +75,7 @@ const getProductos  =async (req,res)=>{
 
     } catch (error) {
 
-
+        console.log(error.message);
         res.status(500).json(error.message).end();
     }
 
@@ -88,6 +91,7 @@ const updateProducto=async (req,res)=>{
         if (data.nombre) data.nombre=data.nombre.toUpperCase();
         //DANDO LE COMO VALOR AL USUARIO EN ID
         data.usuario=req.usuario._id;
+        
         const Update=await Producto.findByIdAndUpdate(req.params.id,data,{new:true});
            
         res.status(200).json(Update).end();

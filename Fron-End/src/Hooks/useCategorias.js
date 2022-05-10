@@ -1,4 +1,5 @@
-import { useEffect, useState  } from 'react';
+import { useEffect, useState,useContext } from 'react';
+import { category } from '../Contextos/categoryContext/CategorySelected';
 
 export const useCategorias=()=>{
 
@@ -7,6 +8,9 @@ export const useCategorias=()=>{
    const [loteCategorias, setLoteCategorias] = useState([]);
 
    const [idPagina, setIdpagina] = useState(1);
+
+
+   const {setCategorias}=useContext(category);
 
    //FUNCION PARA IR A LA PAGINA SIGUIENTE
    const nextPaginate=() => setIdpagina(element=>element+1);
@@ -31,13 +35,21 @@ export const useCategorias=()=>{
         method: 'GET', 
         headers: {
           'Content-Type': 'application/json',
-          'x-token':"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MWIzZTg4ZGU0NDdlOTRjMzYxNmU1NzkiLCJpYXQiOjE2NTIxMjc1ODksImV4cCI6MTY1MjE0MTk4OX0.BKRMii9sg_r6VkbDjfcS4XlIJmhrLOGoZq3-kn_HWKY"
+          'x-token':"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MWIzZTg4ZGU0NDdlOTRjMzYxNmU1NzkiLCJpYXQiOjE2NTIyMTUyMzcsImV4cCI6MTY1MjIyOTYzN30.bx5GjyWYDRamQDRFn4rENCs2eFBMisXW2PJIdVVBK04"
         }
         })
 
         .then(dataFect=>dataFect.json())
 
-        .then((data)=>setdataItems(data.categorias))
+        .then(({categorias})=>{
+          
+          
+          setdataItems(categorias);
+        
+          setCategorias(categorias);
+        
+        
+        })
       
         .catch(error=>console.log(error));
       

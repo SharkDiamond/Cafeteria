@@ -1,9 +1,10 @@
 //IMPORTACIONES
 import { Button, Col } from 'react-bootstrap';
-import React from 'react';
+import {React,useContext} from 'react';
 import ItemCategoria from './ItemCategoria';
 import '../App.css';
 import { useCategorias } from '../Hooks/useCategorias.js';
+import { category } from '../Contextos/categoryContext/CategorySelected';
 
 
 
@@ -29,7 +30,7 @@ export default function BarraCategorias() {
 
         {totalCategorias==0 || totalCategorias==undefined  
         ? <h3>No hay Categorias</h3>  
-        : loteCategorias.map(({nombre,cantidad})=><ItemCategoria key={nombre} title={nombre} nameCategoria={nombre} cantidadProducto={cantidad}/>) }
+        : loteCategorias.map(({nombre,cantidad,_id})=><ItemCategoria uuidCategoria={_id} key={nombre} title={nombre}  nameCategoria={nombre} cantidadProducto={cantidad}/>) }
         {
         //BOTON NEXT
         totalCategorias==0 || totalCategorias<5 || idPagina==totalPage  

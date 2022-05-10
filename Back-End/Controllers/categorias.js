@@ -13,14 +13,11 @@ const getCategorias=async(req,res)=>{
             Categoria.find({estado:true}).skip(Number(desde)).limit(Number(hasta)).populate("usuario","nombre"),
             Producto.find().populate("usuario","nombre").populate("categoria","nombre")
 
-       
-       
-
         ]);
         
         categorias.forEach((categoria,index) => {
           
-          let cantidad= Productos.filter(producto=>producto.categoria.nombre===categoria.nombre).length;
+          let cantidad= Productos.filter(producto=>producto.categoria.nombre===categoria.nombre && producto.estado && categoria.estado).length;
   
           categorias[index]={
             ...categorias[index]._doc,

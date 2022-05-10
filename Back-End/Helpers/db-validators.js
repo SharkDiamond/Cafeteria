@@ -30,8 +30,9 @@ const existeCategoriaPorId=async (id)=>{
 const existeProducto=async(nombre)=>{
     //BUSCANDO UN PRODUCTO CON ESE NOMBRE
     const exits= await Producto.findOne({nombre});
+
     //EN DANDO CASO QUE EXISTA
-    if (!exits) throw new Error(`El producto ${nombre} ya existe!`);
+    if (exits) throw new Error(`El producto ${nombre} ya existe!`);
 
 }
 
