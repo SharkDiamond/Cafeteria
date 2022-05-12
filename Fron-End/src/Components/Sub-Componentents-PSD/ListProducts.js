@@ -9,7 +9,7 @@ export default function ListProducts() {
 
   let Productos= useListProducts();
 
-  const { productoSeleccionado,setProducto}= useContext(producto);
+  const {setProducto}= useContext(producto);
 
 
   return (

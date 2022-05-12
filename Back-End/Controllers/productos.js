@@ -87,6 +87,9 @@ const updateProducto=async (req,res)=>{
     try {
         //OBTENIENDO LOS DATOS DEL BODY
         const {usuario,estado,...data}=req.body;
+
+        console.log('data del fron ',data);
+
         //CONVIRTIENDO EL NOMBRE A MAYUSCULAS SI VIENE        
         if (data.nombre) data.nombre=data.nombre.toUpperCase();
         //DANDO LE COMO VALOR AL USUARIO EN ID

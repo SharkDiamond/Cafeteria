@@ -1,10 +1,10 @@
-import { Col,Row } from 'react-bootstrap';
+import {NombreProducto} from '../Contextos/categoryContext/productContext/NombreProducto.js';
+import { producto } from '../Contextos/categoryContext/productContext/ProductSelected.js';
+import ListProducts from './Sub-Componentents-PSD/ListProducts.js';
 import Grafica from './Sub-Componentents-PSD/Grafica.js';
+import { Col,Row } from 'react-bootstrap';
 import React, { useContext } from 'react';
 import '../App.css';
-import ListProducts from './Sub-Componentents-PSD/ListProducts.js';
-import { producto } from '../Contextos/categoryContext/productContext/ProductSelected.js';
-
 
 export default function PanelShowData() {
   
@@ -13,9 +13,9 @@ export default function PanelShowData() {
   return (
     <Col lg="7" className='tamanoPanelData me-5'>
         
-       
+       <NombreProducto>
 
-        <Row className=''>
+    <Row>
 
 
           <Col lg="6" className='segundoColor rounded-start pt-4 pb-4 tamanoPanelinfo border border-end border-dark'>
@@ -33,7 +33,7 @@ export default function PanelShowData() {
       
     </Row>
 
-   
+      </NombreProducto>
     
     </Col>
   )

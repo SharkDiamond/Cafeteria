@@ -1,11 +1,9 @@
 //IMPORTACIONES
-import { Button, Col } from 'react-bootstrap';
-import {React,useContext} from 'react';
-import ItemCategoria from './ItemCategoria';
-import '../App.css';
 import { useCategorias } from '../Hooks/useCategorias.js';
-import { category } from '../Contextos/categoryContext/CategorySelected';
-
+import { Button, Col } from 'react-bootstrap';
+import ItemCategoria from './ItemCategoria';
+import {React} from 'react';
+import '../App.css';
 
 
 export default function BarraCategorias() {

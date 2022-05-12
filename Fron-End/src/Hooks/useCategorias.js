@@ -1,4 +1,4 @@
-import { useEffect, useState,useContext } from 'react';
+import { useEffect, useState,useContext,useRef } from 'react';
 import { category } from '../Contextos/categoryContext/CategorySelected';
 
 export const useCategorias=()=>{
@@ -9,8 +9,9 @@ export const useCategorias=()=>{
 
    const [idPagina, setIdpagina] = useState(1);
 
+   const {categorias,setCategorias}=useContext(category);
 
-   const {setCategorias}=useContext(category);
+    const updateCount= useRef(0);
 
    //FUNCION PARA IR A LA PAGINA SIGUIENTE
    const nextPaginate=() => setIdpagina(element=>element+1);
@@ -21,21 +22,21 @@ export const useCategorias=()=>{
    //FUNCION QUE ACTUALIZA EL LOTE DE LA CATEGORIA
    const nextCategorias=(idPaginate) => {
     
-    //SACANDO EL ARREGLO DESDE EL INDICE INDICADO AL INFINITO
-    const data=dataItems.slice(5*idPaginate-5,Infinity);
-    //ACTUALIZANDO EL ESTADO DE LOTE CATEGORIA
-    setLoteCategorias(data.slice(0,5));
+      //SACANDO EL ARREGLO DESDE EL INDICE INDICADO AL INFINITO
+      const data=dataItems.slice(5*idPaginate-5,Infinity);
+      //ACTUALIZANDO EL ESTADO DE LOTE CATEGORIA
+      setLoteCategorias(data.slice(0,5));
 
-}
+    }
 
-   //CUANDO EL COMPONENTE SE MONTE
+   //CICLO DE VIDA DE MONTAJE
    useEffect(() => {
      
         fetch(`http://localhost:8080/api/categorias?desde=0&hasta=${Infinity}`,{
         method: 'GET', 
         headers: {
           'Content-Type': 'application/json',
-          'x-token':"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MWIzZTg4ZGU0NDdlOTRjMzYxNmU1NzkiLCJpYXQiOjE2NTIyMTUyMzcsImV4cCI6MTY1MjIyOTYzN30.bx5GjyWYDRamQDRFn4rENCs2eFBMisXW2PJIdVVBK04"
+          'x-token':"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MWIzZTg4ZGU0NDdlOTRjMzYxNmU1NzkiLCJpYXQiOjE2NTIzODA5NzMsImV4cCI6MTY1MjM5NTM3M30.-EBsW7trt4Rg5rNN6wfl6JhtFZgiMMQ0-HSw9tUYO4k"
         }
         })
 
@@ -47,8 +48,7 @@ export const useCategorias=()=>{
           setdataItems(categorias);
         
           setCategorias(categorias);
-        
-        
+          
         })
       
         .catch(error=>console.log(error));
@@ -59,7 +59,25 @@ export const useCategorias=()=>{
    useEffect(() => nextCategorias(idPagina), [idPagina])
    
    //CICLO DE VIDA DE ACTUALIZACION ESTADO dataItems
-   useEffect(() => setLoteCategorias(dataItems.slice(0,5)),[dataItems]);
+   useEffect(() =>{
+
+     //SACANDO EL ARREGLO DESDE EL INDICE INDICADO AL INFINITO
+     const data=dataItems.slice(5*idPagina-5,Infinity);
+     
+     setLoteCategorias(data.slice(0,5));
+
+   } ,[dataItems]);
+
+
+   //CICLO DE VIDA DE ACTUALIZACION CUANDO EL ESTADO GLOBAL CATEGORIA CAMBIE
+   useEffect(()=>{
+      //SUMANDOLE 1 AL CONTEO DE EJECUCION DE ESTE METODO
+      updateCount.current+=1;
+
+      if (updateCount.current>4) setdataItems(categorias);
+
+   } ,[categorias]);
+
 
     return {total:dataItems.length,
             loteCategorias,
