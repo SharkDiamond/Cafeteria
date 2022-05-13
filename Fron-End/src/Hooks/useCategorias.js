@@ -33,10 +33,10 @@ export const useCategorias=()=>{
    useEffect(() => {
      
         fetch(`http://localhost:8080/api/categorias?desde=0&hasta=${Infinity}`,{
-        method: 'GET', 
+        method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'x-token':"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MWIzZTg4ZGU0NDdlOTRjMzYxNmU1NzkiLCJpYXQiOjE2NTIzODA5NzMsImV4cCI6MTY1MjM5NTM3M30.-EBsW7trt4Rg5rNN6wfl6JhtFZgiMMQ0-HSw9tUYO4k"
+          'x-token':"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MWIzZTg4ZGU0NDdlOTRjMzYxNmU1NzkiLCJpYXQiOjE2NTI0MTE0MjcsImV4cCI6MTY1MjQyNTgyN30.WqHIAccyqdpwEAb5d3b17ViR55QQdlV_UGExgn2079c"
         }
         })
 

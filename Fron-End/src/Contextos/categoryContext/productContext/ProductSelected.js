@@ -1,16 +1,12 @@
-
-
 import {React,createContext, useState} from 'react';
-
 
 export const producto=createContext("");
 
-export  function ProductSelected({children}) {
+export function ProductSelected({children}) {
+                        //NOTA: CAMBIAR NOMBRE DEL METODO SET
+   const [productoSeleccionado,setProducto] =useState({});
   
-   const [productoSeleccionado,setProducto] =useState('');
-  
-  
-  const constextValue={
+   const constextValue={
 
     productoSeleccionado,
     setProducto

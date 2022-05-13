@@ -1,11 +1,11 @@
-import { productNameContext } from '../../Contextos/categoryContext/productContext/NombreProducto';
+import { productListContext } from '../../Contextos/categoryContext/productContext/ListProductsUpdate';
 import { category } from '../../Contextos/categoryContext/CategorySelected';
-import GraficaProducto from './SubComponents-Grafica/GraficaProducto';
+import GraficaProducto from './SubComponents-Panel-Derecho-Show-Data/GraficaProducto';
 import React, { useContext,useState,useEffect, useRef } from 'react';
-import UpdateProduct from './SubComponents-Grafica/UpdateProduct';
+import UpdateProduct from './SubComponents-Panel-Derecho-Show-Data/UpdateProduct';
 import { Button } from 'react-bootstrap';
 
-export default function Grafica({productoSeleccionado}) {
+export default function PanelDerechoShowData({productoSeleccionado}) {
   
   //MANDAR ESTA LOGICA A UN HOOK
 
@@ -13,14 +13,13 @@ export default function Grafica({productoSeleccionado}) {
 
   const {getCategorias}=useContext(category);
 
-  const {setNameProduct}=useContext(productNameContext);
+  const {setUpdateProductList}=useContext(productListContext);
 
   const cajaOpciones=useRef();
 
   const messageNada=useRef();
 
   const deleteProduct=()=>{
-
 
     fetch(`http://localhost:8080/api/productos/delete/${productoSeleccionado._id}`,{
       method:'DELETE',
@@ -31,11 +30,10 @@ export default function Grafica({productoSeleccionado}) {
 
     }).then(()=>{
       
-      alert('Producto eliminado '+ productoSeleccionado.nombre);
       //ACTUALIZANDO LOS ITEMS DE LA BARRA
       getCategorias();
-      //ACTUALIZANDO LA LISTA DE PRODUCTOS NOTA: MEJORAR
-      setNameProduct(productoSeleccionado._id+"delete");
+      //ACTUALIZANDO LA LISTA DE PRODUCTOS
+      setUpdateProductList(oldState=>!oldState);
       //MOSTRANDO EL MENSAJE
       messageNada.current.className="animacionFormularios";
       //OCULTANDO LA CAJA DE OPCIONES
@@ -47,10 +45,9 @@ export default function Grafica({productoSeleccionado}) {
 
   useEffect(() => {
 
-    messageNada.current.className="d-none";
+      messageNada.current.className="d-none";
    
-    cajaOpciones.current.className="";
-
+      cajaOpciones.current.className="";
 
    },[productoSeleccionado]);
 

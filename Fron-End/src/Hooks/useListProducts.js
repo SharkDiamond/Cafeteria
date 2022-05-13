@@ -1,6 +1,6 @@
 import { category } from "../Contextos/categoryContext/CategorySelected";
 import { useContext,useEffect,useState } from "react";
-import { productNameContext } from "../Contextos/categoryContext/productContext/NombreProducto";
+import { productListContext } from "../Contextos/categoryContext/productContext/ListProductsUpdate";
 
 export  function useListProducts() {
  
@@ -8,34 +8,41 @@ export  function useListProducts() {
     
     const {categorySeleccionada} = useContext(category);
 
-    const {productName}=useContext(productNameContext);
+    const {updateProductList}=useContext(productListContext);
   
     useEffect(() => {
 
-     
-        const obtenerProductos= async() => {
+        const obtenerProductos = async() => {
 
-        const listProductos=  await fetch(`http://localhost:8080/api/productos/obtenerVarios?desde=0&hasta=${Infinity}&categoria=${categorySeleccionada}`,{
-            method: 'GET',
-            headers: {
+            try {
+              
+              //HACIENDO LA PETICION
+              const listProductos= await fetch(`http://localhost:8080/api/productos/obtenerVarios?desde=0&hasta=${Infinity}&categoria=${categorySeleccionada}`,{
+              method: 'GET',
+              headers: {
               'Content-Type': 'application/json',
-              'x-token':"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MWIzZTg4ZGU0NDdlOTRjMzYxNmU1NzkiLCJpYXQiOjE2NTIzODA5NzMsImV4cCI6MTY1MjM5NTM3M30.-EBsW7trt4Rg5rNN6wfl6JhtFZgiMMQ0-HSw9tUYO4k"
+              'x-token':"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MWIzZTg4ZGU0NDdlOTRjMzYxNmU1NzkiLCJpYXQiOjE2NTI0MDY5MTMsImV4cCI6MTY1MjQyMTMxM30.vewazd7C36OqSft-Dns6J5BTkeCB5ggoUOOviiXF9IA"
+              }
+              });
+              //PARSEANDO EL RESULTADO A JSON
+              const resultado=await listProductos.json();
+              //ACTULIZANDO EL ESTADO DE list
+              setList(resultado.productos);
+
+            } catch (error) {
+                
+                //EN DADO CASO OCURRA UN PROBLEMA
+                console.log("Ocurrio un problema");
+
             }
-            });
 
+        }
 
-          const resultado=await listProductos.json();
-
-           setList(resultado.productos);
-
-         
-         }
-         
+         //LLAMANDO LA FUNCION obtenerProductos
          obtenerProductos();
 
-         alert('update list');
-    }, [categorySeleccionada,productName]);
-    
+    }, [categorySeleccionada,updateProductList]);
+   
     return list;
 
 }

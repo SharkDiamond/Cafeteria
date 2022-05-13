@@ -1,5 +1,5 @@
 import { producto as productoGlobal } from '../../../Contextos/categoryContext/productContext/ProductSelected.js';
-import { productNameContext } from '../../../Contextos/categoryContext/productContext/NombreProducto';
+import { productListContext } from '../../../Contextos/categoryContext/productContext/ListProductsUpdate';
 import { category } from '../../../Contextos/categoryContext/CategorySelected';
 import React, {useContext, useState} from 'react';
 import '../../../App.css';
@@ -8,15 +8,13 @@ export default function UpdateProduct({producto}) {
   
 
   //MANDAR TODA LA LOGICA A UN HOOK
-  
   const {categorias,getCategorias,updateCategory}=useContext(category);
   //ESTADO PARA EL FORMULARIO
   const [dataForms,setDataForms]=useState({});
  
   const {setProducto}=useContext(productoGlobal);
 
-  const {setNameProduct}=useContext(productNameContext);
-
+  const {setUpdateProductList}=useContext(productListContext);
 
   const update=(e) => {
 
@@ -27,7 +25,7 @@ export default function UpdateProduct({producto}) {
     method:"PUT",
     headers: {
       'Content-Type': 'application/json',
-      'x-token':"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MWIzZTg4ZGU0NDdlOTRjMzYxNmU1NzkiLCJpYXQiOjE2NTIzODA5NzMsImV4cCI6MTY1MjM5NTM3M30.-EBsW7trt4Rg5rNN6wfl6JhtFZgiMMQ0-HSw9tUYO4k"
+      'x-token':"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MWIzZTg4ZGU0NDdlOTRjMzYxNmU1NzkiLCJpYXQiOjE2NTI0MDY5MTMsImV4cCI6MTY1MjQyMTMxM30.vewazd7C36OqSft-Dns6J5BTkeCB5ggoUOOviiXF9IA"
     },
     body: JSON.stringify(dataForms) 
 
@@ -36,7 +34,6 @@ export default function UpdateProduct({producto}) {
         data.categoria={_id:data.categoria};
         //ACTUALIZANDO EL PRODUCTO CON LOS DATOS NUEVOS
         setProducto(data);
-
         //ACTUALIZAR SOLO SI SE CAMBIE LA CATEGORIA
         if (data.categoria._id!=producto.categoria._id){
         //OBTENIENDO LAS CATEGORIAS NUEVAMENTE
@@ -45,7 +42,7 @@ export default function UpdateProduct({producto}) {
         updateCategory(data.categoria._id);
         }
         //EN DADO CASO SE CAMBIE EL NOMBRE
-        if(data.nombre!=producto.nombre) setNameProduct(data.nombre);
+        if(data.nombre!=producto.nombre) setUpdateProductList(oldUpdateList=>!oldUpdateList);
        
     })
     .catch(error=>console.log(error.message));
@@ -95,4 +92,5 @@ export default function UpdateProduct({producto}) {
 
     </form>
   )
+
 }
